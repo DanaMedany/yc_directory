@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!-- https://www.sanity.io/docs/studio/manually-group-items-in-a-paneT -->
+
+<!-- https://www.sanity.io/docs/content-lake/query-cheat-sheet -->
+
+<!-- https://nextjs.org/docs/app/guides/incremental-static-regeneration -->
+
+his is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
