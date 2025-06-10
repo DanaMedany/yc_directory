@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { Login } from "@/utils/authActions";
+import { Login } from '@/utils/authActions';
 
 type ButtonProps = {
-  children: React.ReactNode;
+	children: React.ReactNode;
 };
 
 function Button({ children }: ButtonProps) {
-  const handleLogin = async () => {
-    await Login("github");
-  };
+	const handleLogin = async () => {
+		await Login('github');
+	};
 
-  return <button onClick={handleLogin}>{children}</button>;
+	return <button onClick={handleLogin}>{children}</button>;
 }
 
 export default Button;

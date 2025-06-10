@@ -1,9 +1,8 @@
-import { defineQuery } from "next-sanity";
-import { client } from "../client";
+import { defineQuery } from 'next-sanity';
+import { client } from '../client';
 
 export async function getPlaylistBySlug(slug: string) {
-  const PLAYLISTBYSLUG =
-    defineQuery(`*[_type == "playlist" && slug.current == $slug][0]{
+	const PLAYLISTBYSLUG = defineQuery(`*[_type == "playlist" && slug.current == $slug][0]{
   _id,
   title,
   slug,
@@ -27,5 +26,5 @@ export async function getPlaylistBySlug(slug: string) {
   }
 }`);
 
-  return await client.fetch(PLAYLISTBYSLUG, { slug });
+	return await client.fetch(PLAYLISTBYSLUG, { slug });
 }

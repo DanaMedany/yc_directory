@@ -1,7 +1,7 @@
-import { client } from "../client";
+import { client } from '../client';
 
 export const authorByGithubId = async (id: string) => {
-  const getAuthorById = `*[_type == "author" && id == $id][0]{
+	const getAuthorById = `*[_type == "author" && id == $id][0]{
     _id,
     id,
     name,
@@ -11,7 +11,5 @@ export const authorByGithubId = async (id: string) => {
     email
   }`;
 
-  return await client
-    .withConfig({ useCdn: false })
-    .fetch(getAuthorById, { id });
+	return await client.withConfig({ useCdn: false }).fetch(getAuthorById, { id });
 };

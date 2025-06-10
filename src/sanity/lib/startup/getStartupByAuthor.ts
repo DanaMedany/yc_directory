@@ -1,8 +1,8 @@
-import { groq } from "next-sanity";
-import { client } from "../client";
+import { groq } from 'next-sanity';
+import { client } from '../client';
 
 export async function getStartupByAuthor(id: string) {
-  const STARTUP_QUERY = groq`*[_type == 'startup' && author._ref == $id] |  order(__createdAt desc) {
+	const STARTUP_QUERY = groq`*[_type == 'startup' && author._ref == $id] |  order(__createdAt desc) {
   _id, 
   title, 
   image, 
@@ -15,5 +15,5 @@ export async function getStartupByAuthor(id: string) {
   
 }`;
 
-  return await client.fetch(STARTUP_QUERY, { id });
+	return await client.fetch(STARTUP_QUERY, { id });
 }

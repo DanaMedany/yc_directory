@@ -1,58 +1,56 @@
-"use server";
+'use server';
 
-import { auth } from "@/auth";
-import { writeClient } from "@/sanity/lib/write-client";
-import slugify from "slugify";
+import { auth } from '@/auth';
+import { writeClient } from '@/sanity/lib/write-client';
+import slugify from 'slugify';
 
 export async function createPitch(state, form: FormData, pitch: string) {
-  const session = await auth();
-  // Check if the user is authenticated
-  // If not authenticated, return an error response
-  if (!session)
-    return JSON.parse(
-      JSON.stringify({
-        status: "ERROR",
-        error: "Not siged in",
-      })
-    );
+	const session = await auth();
+	// Check if the user is authenticated
+	// If not authenticated, return an error response
+	if (!session)
+		return JSON.parse(
+			JSON.stringify({
+				status: 'ERROR',
+				error: 'Not siged in',
+			})
+		);
 
-  // If authenticated, proceed with the action
+	// If authenticated, proceed with the action
 
-  const { title, description, category, link } = Object.fromEntries(
-    Array.from(form).filter(([key]) => key !== "pitch")
-  );
+	const { title, description, category, link } = Object.fromEntries(
+		Array.from(form).filter(([key]) => key !== 'pitch')
+	);
 
-  const slug = slugify(title as string, { lower: true, strict: true });
+	const slug = slugify(title as string, { lower: true, strict: true });
 
-  try {
-    const startup = {
-      title,
-      description,
-      category,
-      image: link,
-      slug: {
-        _type: slug,
-        current: slug,
-      },
-      author: {
-        _type: "reference",
-        _ref: session?.id,
-      },
-      pitch,
-    };
+	try {
+		const startup = {
+			title,
+			description,
+			category,
+			image: link,
+			slug: {
+				_type: slug,
+				current: slug,
+			},
+			author: {
+				_type: 'reference',
+				_ref: session?.id,
+			},
+			pitch,
+		};
 
-    const result = await writeClient.create({ _type: "startup", ...startup });
+		const result = await writeClient.create({ _type: 'startup', ...startup });
 
-    return JSON.parse(
-      JSON.stringify({ ...result, error: "", status: "SUCCESS" })
-    );
-  } catch (error) {
-    console.log("Error creating pitch:", error);
-    return JSON.parse(
-      JSON.stringify({
-        error: JSON.stringify(error),
-        status: "ERROR",
-      })
-    );
-  }
+		return JSON.parse(JSON.stringify({ ...result, error: '', status: 'SUCCESS' }));
+	} catch (error) {
+		console.log('Error creating pitch:', error);
+		return JSON.parse(
+			JSON.stringify({
+				error: JSON.stringify(error),
+				status: 'ERROR',
+			})
+		);
+	}
 }
